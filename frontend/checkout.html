@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmimi i Porosisë</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9a9acc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .konteiner-forme {
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .konteiner-forme h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        .emri,
+        .mbiemri,
+        .email,
+        .telefoni,
+        .adresa {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .pagesa {
+            margin-bottom: 20px;
+        }
+       
+        .pagesa-options {
+            display: flex;
+            gap: 20px;
+        }
+        .pagesa-options label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            color: #555555;
+        }
+        .buton-dorezo {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .buton-dorezo:hover {
+            background-color: #0056b3;
+        }
+        
+       
+        #gifImage {
+            display: none;  
+            width: 300px;
+            height: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="konteiner-forme">
+        <h2>Konfirmimi i Porosisë</h2>
+        <form id="orderForm" action="#">
+            <div class="emri">
+                <label for="emer">Emri</label>
+                <input type="text" id="emer" name="emer" placeholder="Shkruani emrin tuaj" required>
+            </div>
+            <div class="mbiemri">
+                <label for="mbiemer">Mbiemri</label>
+                <input type="text" id="mbiemer" name="mbiemer" placeholder="Shkruani mbiemrin tuaj" required>
+            </div>
+            <div class="email">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Shkruani email-in tuaj" required>
+            </div>
+            <div class="telefoni">
+                <label for="nr-telefoni">Nr Telefoni</label>
+                <input type="tel" id="nr-telefoni" name="nr-telefoni" placeholder="Shkruani numrin tuaj të telefonit" required>
+            </div>
+            <div class="adresa">
+                <label for="adresa">Adresa</label>
+                <input type="text" id="adresa" name="adresa" placeholder="Shkruani adresën tuaj" required>
+            </div>
+            <div class="pagesa">
+                <p>Zgjidhni mënyrën e pagesës:</p>
+                <div class="pagesa-options">
+                    <label>
+                        <input type="radio" name="pagesa" value="cash" required> Cash
+                    </label>
+                    <label>
+                        <input type="radio" name="pagesa" value="karte"> Kartë
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="buton-dorezo">Konfirmo Porosinë</button>
+        </form>
+        
+     
+        <img id="gifImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvXQ-CIXcUSYhWBCeTbgZnNFZ4A_0hdZHgA&s" />
+    </div>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();  
+            alert('Porosia u konfirmua!');  
+            document.getElementById('gifImage').style.display = 'block';  
+        });
+    </script>
+</body>
+</html>

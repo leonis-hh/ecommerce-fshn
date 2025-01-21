@@ -33,8 +33,6 @@ input, button {
 nav {
     background-color: #333;
     padding: 10px;
-    text-align: center;
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,6 +59,12 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+#navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 #search-container {
     display: flex;
     gap: 10px;
@@ -82,4 +86,19 @@ nav ul li a:hover {
 
 #search-container button:hover {
     background-color: #777;
+}
+
+#auth-links {
+    display: flex;
+    gap: 10px;
+}
+
+#auth-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#auth-links a:hover {
+    text-decoration: underline;
 }
