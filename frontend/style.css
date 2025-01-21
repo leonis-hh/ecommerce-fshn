@@ -3,57 +3,83 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-  }
-  
-  h1 {
+}
+
+h1 {
     text-align: center;
     margin: 20px;
-  }
-  
-  form {
+}
+
+form {
     max-width: 300px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-  }
-  
-  input, button {
+}
+
+input, button {
     margin: 10px 0;
     padding: 10px;
     font-size: 16px;
-  }
-  
-  .product, .order {
+}
+
+.product, .order {
     border: 1px solid #ccc;
     padding: 15px;
     margin: 10px;
     background-color: #fff;
-  }
-  
-  nav {
+}
+
+nav {
     background-color: #333;
     padding: 10px;
     text-align: center;
-  }
-  
-  nav ul {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
-  
-  nav ul li {
-    display: inline;
+    display: flex;
+}
+
+nav ul li {
     margin: 0 15px;
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
-  }
-  
-  nav ul li a:hover {
+}
+
+nav ul li a:hover {
     text-decoration: underline;
-  }
-  
+}
+
+#search-container {
+    display: flex;
+    gap: 10px;
+}
+
+#searchInput {
+    padding: 5px;
+    font-size: 16px;
+}
+
+#search-container button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#search-container button:hover {
+    background-color: #777;
+}
