@@ -94,7 +94,9 @@
           if (!response.ok) {
             throw new Error('Failed to process purchase');
           }
+          window.location.href = "checkout.html";
           return response.text();
+        
         })
         .then(message => {
           alert(message);
