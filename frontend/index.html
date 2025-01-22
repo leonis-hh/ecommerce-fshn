@@ -5,27 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop</title>
   <link rel="stylesheet" href="style.css">
+  <script src="js/navbar.js" defer></script>
 </head>
 <body>
   <div id="navbar-container"></div>
   <h1>Welcome to the Shop</h1>
+  <div>
+    <input type="text" id="searchInput" placeholder="Search products">
+    <button id="searchButton" onclick="searchProducts()">Search</button>
+  </div>
   <div id="products"></div>
   <script>
-    let allProducts = [];
-
     fetch('navbar.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar-container').innerHTML = data;
       });
 
-    fetch('http://localhost:8080/api/products')
-      .then(response => response.json())
-      .then(products => {
-        allProducts = products;
-        displayProducts(products);
-      })
-      .catch(error => console.error('Error fetching products:', error));
+    function fetchProducts(search = '') {
+      const url = `http://localhost:8080/api/products${search ? `?search=${encodeURIComponent(search)}` : ''}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(products => {
+          displayProducts(products);
+        })
+        .catch(error => console.error('Error fetching products:', error));
+    }
 
     function displayProducts(products) {
       const productsDiv = document.getElementById('products');
@@ -34,22 +39,39 @@
         const productDiv = document.createElement('div');
         productDiv.className = 'product';
         productDiv.innerHTML = `
+         <img src="images/${product.imageName}.jpeg" alt="${product.name}" class="product-image">
           <h2>${product.name}</h2>
           <p>${product.description}</p>
           <p>Price: $${product.price}</p>
+          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
         `;
         productsDiv.appendChild(productDiv);
       });
     }
 
-    function searchProducts() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const filteredProducts = allProducts.filter(product => 
-        product.name.toLowerCase().includes(query) || 
-        product.description.toLowerCase().includes(query)
-      );
-      displayProducts(filteredProducts);
+
+    function addToCart(id, name, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingProduct = cart.find(item => item.id === id);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} has been added to the cart.`);
     }
+
+    
+    function searchProducts() {
+  const query = document.getElementById('searchInput').value.trim();
+  fetchProducts(query);
+}
+
+
+    fetchProducts();
   </script>
 </body>
 </html>

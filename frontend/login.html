@@ -29,9 +29,11 @@
       .then(response => response.json())
       .then(data => {
         if (data && data.userId) {
+          // Store the login status and userId in localStorage
+          localStorage.setItem('userLoggedIn', 'true');
           localStorage.setItem('userId', data.userId);
           alert('Login successful');
-          window.location.href = 'index.html';
+          window.location.href = 'index.html';  // Redirect to the homepage after login
         } else {
           alert('Invalid credentials');
         }

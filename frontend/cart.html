@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/navbar.js" defer></script>
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <h1>Your Shopping Cart</h1>
+  <div id="cart"></div>
+  <button id="purchaseButton" onclick="purchaseCart()">Purchase</button>
+  <button id="clearCartButton" onclick="clearCart()">Clear Cart</button>
+  <script>
+    const userId = localStorage.getItem("userId"); 
+
+  
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      });
+
+  
+    function displayCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartDiv = document.getElementById('cart');
+      cartDiv.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartDiv.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'cart-item';
+        cartItemDiv.innerHTML = `
+          <p>${item.name} - $${item.price} x ${item.quantity} = $${item.price * item.quantity}</p>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartDiv.appendChild(cartItemDiv);
+      });
+
+      const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const totalDiv = document.createElement('div');
+      totalDiv.className = 'cart-total';
+      totalDiv.innerHTML = `<p><strong>Total: $${totalPrice}</strong></p>`;
+      cartDiv.appendChild(totalDiv);
+    }
+
+
+    function removeFromCart(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1); 
+      localStorage.setItem('cart', JSON.stringify(cart)); 
+      displayCart(); 
+    }
+
+  
+    function clearCart(){
+      localStorage.removeItem('cart');
+      displayCart();
+      alert('Cart cleared!');
+    };
+
+    function purchaseCart(){
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      const orderItems = cart.map(item => ({
+        productId: item.id,
+        quantity: item.quantity
+      }));
+
+      const orderPurchase = {
+        userId,
+        orderItems
+      };
+
+      fetch(`http://localhost:8080/api/orders/user/${userId}/purchase`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderPurchase)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to process purchase');
+          }
+          return response.text();
+        })
+        .then(message => {
+          alert(message);
+          localStorage.removeItem('cart');
+          displayCart();
+        })
+        .catch(error => {
+          console.error('Error during purchase:', error);
+          alert('An error occurred during purchase. Please try again.');
+        });
+    };
+
+    displayCart();
+  </script>
+</body>
+</html>
