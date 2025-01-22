@@ -12,6 +12,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column; 
+            margin: 0;
         }
         .konteiner-forme {
             background-color: #ffffff;
@@ -20,6 +22,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            flex-grow: 1; 
         }
         .konteiner-forme h2 {
             text-align: center;
@@ -73,6 +76,15 @@
         }
         .buton-dorezo:hover {
             background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: auto; 
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
         }
         
        
@@ -133,10 +145,12 @@
             document.getElementById('gifImage').style.display = 'block';  
         });
     </script>
-  <footer>
-    <p>&copy; 2025 FSHN eCommerce</p>
-    <p>Phone: +355 68 230 2059</p>
-    <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
-  </footer>
+  
+    <footer>
+        <p>&copy; 2025 FSHN eCommerce</p>
+        <p>Phone: +355 68 230 2059</p>
+        <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
+    </footer>
 </body>
 </html>
+

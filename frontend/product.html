@@ -11,7 +11,6 @@
   <div id="navbar-container"></div>
   <h1>Product Details</h1>
   <div id="product-details">
-    <!-- Product details will be dynamically inserted here -->
   </div>
   <script>
     fetch('navbar.html')
@@ -38,7 +37,7 @@
     function displayProduct(product) {
       const productDetailsDiv = document.getElementById('product-details');
       productDetailsDiv.innerHTML = `
-        <img src="images/${product.imageName}.jpeg" alt="${product.name}" class="product-image">
+        <img src="images/${product.imageName}" alt="${product.name}" class="product-image" width="300" height="200">
         <h2>${product.name}</h2>
         <p>${product.description}</p>
         <p>Price: $${product.price}</p>
@@ -59,8 +58,6 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       alert(`${name} has been added to the cart.`);
     }
-
-    // Fetch product data based on the ID from the URL
     const productId = getProductId();
     if (productId) {
       fetchProduct(productId);

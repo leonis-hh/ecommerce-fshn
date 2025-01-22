@@ -1,4 +1,4 @@
-/* Basic styles for the body */
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -6,7 +6,7 @@ body {
     background-color: #f4f4f9;
 }
 
-/* Heading Styling */
+
 h1 {
     text-align: center;
     margin: 20px;
@@ -14,7 +14,7 @@ h1 {
     font-size: 2.5rem;
 }
 
-/* Form Styling */
+
 form {
     max-width: 350px;
     margin: 0 auto;
@@ -46,7 +46,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Product and Order Styling */
+
 .product, .order {
     border-radius: 10px;
     padding: 20px;
@@ -60,14 +60,14 @@ button:hover {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Navigation Styles */
+
 nav {
     background-color: #333;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;  /* Allows wrapping of items if necessary */
+    flex-wrap: wrap;  
 }
 
 nav ul {
@@ -140,7 +140,7 @@ nav ul li a:hover {
 
 #user-name {
     text-decoration: none;
-    color: white !important;  /* Ensures the name is always white */
+    color: white !important;  
     cursor: pointer;
 }
 
@@ -172,7 +172,7 @@ nav ul li a:hover {
     transition: background-color 0.3s;
 }
 
-/* Sidebar Styles */
+
 .sidebar {
     width: 250px;
     background-color: #333;
@@ -227,9 +227,9 @@ nav ul li a:hover {
     background-color: #c0392b;
 }
 
-/* Main Content */
+
 .main-content {
-    margin-left: 270px; /* Increased margin to provide more space between sidebar and content */
+    margin-left: 270px; 
     padding: 30px;
     max-width: 1200px;
     margin-right: auto;
@@ -255,9 +255,9 @@ footer {
     text-align: center;
     padding: 20px 0;
     display: flex;
-    justify-content: center;  /* Centers the content horizontally */
-    align-items: center;  /* Vertically aligns the items */
-    gap: 30px;  /* Adds space between the items */
+    justify-content: center;  
+    align-items: center;  
+    gap: 30px;  
   }
   
   footer p {
@@ -273,7 +273,123 @@ footer {
     text-decoration: underline;
   }
 
-/* Responsive Design */
+
+@keyframes bounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+
+  .add-to-cart-btn:active {
+    animation: bounce 0.3s ease-in-out;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #0056b3;
+  }
+
+  #cart {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+    background-color: #c0392b;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: right;
+    font-weight: bold;
+    color: #333;
+}
+
+
+#purchaseButton, #clearCartButton {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#purchaseButton:hover, #clearCartButton:hover {
+    background-color: #0056b3;
+}
+
+#purchaseButton:active, #clearCartButton:active {
+    transform: scale(0.95);
+}
+
+#clearCartButton {
+    background-color: #e74c3c;
+}
+
+#clearCartButton:hover {
+    background-color: #c0392b;
+}
+
+
+#cart p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 200px;

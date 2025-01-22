@@ -3,80 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop</title>
+  <title>Home</title>
   <link rel="stylesheet" href="style.css">
   <script src="js/navbar.js" defer></script>
+  <style>
+    section {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 1200px; 
+    }
+
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      width:500px;
+      height: 200px;;
+    }
+
+    .product h3 {
+      font-size: 1.1rem;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .product p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
   <div id="navbar-container"></div>
-  <h1>Welcome to the Shop</h1>
-  <div>
-    <input type="text" id="searchInput" placeholder="Search products">
-    <button id="searchButton" onclick="searchProducts()">Search</button>
-  </div>
-  <div id="products"></div>
+  <h1>Welcome to FSHN eCommerce</h1>
+  <section>
+    <h2>Latest Products</h2>
+    <div class="product-grid">
+      <div class="product">
+        <a href="product.html?id=21">
+          <img src="images/smartphone_x1.jpg" alt="Product 1">
+        </a>
+        <h3>Smartphone X1</h3>
+        <p>$699.99</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=22">
+          <img src="images/laptop_pro_15.jpg" alt="Product 2">
+        </a>
+        <h3>Laptop Pro 15</h3>
+        <p>$1299.99</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=26">
+          <img src="images/great_adventure.jpg" alt="Product 3">
+        </a>
+        <h3>Great Adventure</h3>
+        <p>$15.99</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=32">
+          <img src="images/denim_jeans.jpg" alt="Product 4">
+        </a>
+        <h3>Denim Jeans</h3>
+        <p>$49.99</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>Best Selling</h2>
+    <div class="product-grid">
+      <div class="product">
+        <a href="product.html?id=25">
+          <img src="images/gaming_console.jpg" alt="Product 5">
+        </a>
+        <h3>Gaming Console</h3>
+        <p>$499.99</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=24">
+          <img src="images/4k_tv.jpg" alt="Product 6">
+        </a>
+        <h3>4K ULTRA HD TV</h3>
+        <p>$40.00</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=34">
+          <img src="images/sports_shoes.jpg" alt="Product 7">
+        </a>
+        <h3>Sports Shoes</h3>
+        <p>$59.99</p>
+      </div>
+      <div class="product">
+        <a href="product.html?id=33">
+          <img src="images/winter_jacket.jpg" alt="Product 8">
+        </a>
+        <h3>Winter Jacket</h3>
+        <p>$89.99</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 FSHN eCommerce</p>
+    <p>Phone: +355 68 230 2059</p>
+    <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
+  </footer>
   <script>
     fetch('navbar.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar-container').innerHTML = data;
       });
-
-    function fetchProducts(search = '') {
-      const url = `http://localhost:8080/api/products${search ? `?search=${encodeURIComponent(search)}` : ''}`;
-      fetch(url)
-        .then(response => response.json())
-        .then(products => {
-          displayProducts(products);
-        })
-        .catch(error => console.error('Error fetching products:', error));
-    }
-
-    function displayProducts(products) {
-      const productsDiv = document.getElementById('products');
-      productsDiv.innerHTML = '';
-      products.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.className = 'product';
-        productDiv.innerHTML = `
-         <img src="images/${product.imageName}.jpeg" alt="${product.name}" class="product-image">
-          <h2>${product.name}</h2>
-          <p>${product.description}</p>
-          <p>Price: $${product.price}</p>
-          <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
-        `;
-        productsDiv.appendChild(productDiv);
-      });
-    }
-
-
-    function addToCart(id, name, price) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const existingProduct = cart.find(item => item.id === id);
-
-      if (existingProduct) {
-        existingProduct.quantity += 1;
-      } else {
-        cart.push({ id, name, price, quantity: 1 });
-      }
-
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(`${name} has been added to the cart.`);
-    }
-
-    
-    function searchProducts() {
-  const query = document.getElementById('searchInput').value.trim();
-  fetchProducts(query);
-}
-
-
-    fetchProducts();
   </script>
-  <footer>
-    <p>&copy; 2025 FSHN eCommerce</p>
-    <p>Phone: +355 68 230 2059</p>
-    <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
-  </footer>
 </body>
 </html>
+
