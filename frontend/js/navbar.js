@@ -5,10 +5,9 @@ window.onload = function() {
   const signupLink = document.getElementById('signup-link');
   const userInfo = document.getElementById('user-info');
   const userNameElement = document.getElementById('user-name');
-  const logoutLink = document.getElementById('logout-link');  // If logout link is present
 
   if (userLoggedIn === 'true' && userId) {
-      // If logged in, hide login/signup links and show user info
+      
       if (loginLink && signupLink) {
           loginLink.style.display = 'none';
           signupLink.style.display = 'none';
@@ -18,7 +17,7 @@ window.onload = function() {
           userInfo.style.display = 'inline';
       }
 
-      // Fetch user data using the userId
+      
       fetch(`http://localhost:8080/api/users/${userId}`)
           .then(response => response.json())
           .then(data => {
@@ -33,13 +32,13 @@ window.onload = function() {
               userNameElement.textContent = 'User';  // Fallback in case of error
           });
   } else {
-      // If not logged in, show login/signup links
+      
       if (loginLink && signupLink) {
           loginLink.style.display = 'inline';
           signupLink.style.display = 'inline';
       }
 
-      // Hide user info
+      
       if (userInfo) {
           userInfo.style.display = 'none';
       }
