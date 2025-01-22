@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ - Clothing Shop</title>
+  <title>FAQ - FSHN eCommerce</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,8 +40,10 @@
       color: #555;
     }
   </style>
+  <script src="js/navbar.js" defer></script>
 </head>
 <body>
+ <div id="navbar-container"></div>
   <div class="container">
     <h1>Frequently Asked Questions</h1>
 
@@ -92,5 +94,12 @@
     <p>Phone: +355 68 230 2059</p>
     <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
   </footer>  
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      });
+  </script>
 </body>
 </html>
