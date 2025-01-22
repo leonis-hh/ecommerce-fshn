@@ -249,6 +249,30 @@ nav ul li a:hover {
     color: #34495e;
 }
 
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;  /* Centers the content horizontally */
+    align-items: center;  /* Vertically aligns the items */
+    gap: 30px;  /* Adds space between the items */
+  }
+  
+  footer p {
+    margin: 0;
+  }
+  
+  footer a {
+    color: #00f;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .sidebar {

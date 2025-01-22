@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/navbar.js" defer></script>
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <h1>Product Details</h1>
+  <div id="product-details">
+    <!-- Product details will be dynamically inserted here -->
+  </div>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      });
+
+    function getProductId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    }
+
+    function fetchProduct(id) {
+      const url = `http://localhost:8080/api/products/${id}`;
+      fetch(url)
+        .then(response => response.json())
+        .then(product => {
+          displayProduct(product);
+        })
+        .catch(error => console.error('Error fetching product:', error));
+    }
+
+    function displayProduct(product) {
+      const productDetailsDiv = document.getElementById('product-details');
+      productDetailsDiv.innerHTML = `
+        <img src="images/${product.imageName}.jpeg" alt="${product.name}" class="product-image">
+        <h2>${product.name}</h2>
+        <p>${product.description}</p>
+        <p>Price: $${product.price}</p>
+        <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
+      `;
+    }
+
+    function addToCart(id, name, price) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingProduct = cart.find(item => item.id === id);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} has been added to the cart.`);
+    }
+
+    // Fetch product data based on the ID from the URL
+    const productId = getProductId();
+    if (productId) {
+      fetchProduct(productId);
+    } else {
+      alert('Product ID not found');
+    }
+  </script>
+  <footer>
+    <p>&copy; 2025 FSHN eCommerce</p>
+    <p>Phone: +355 68 230 2059</p>
+    <p>Email: <a href="mailto:support@fshn-ecommerce.com">support@fshn-ecommerce.com</a></p>
+  </footer>
+</body>
+</html>
